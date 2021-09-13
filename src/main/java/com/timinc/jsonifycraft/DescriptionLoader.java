@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.timinc.jsonifycraft.description.JsonDescription;
+import com.timinc.jsonifycraft.description.providers.IProviderBlock;
 import com.timinc.jsonifycraft.description.providers.IProviderItem;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -65,6 +67,16 @@ public class DescriptionLoader {
                 .forEach(item -> {
                     JsonifyCraft.log("Registering item: %s", item.getRegistryName());
                     registry.register(item);
+                });
+    }
+
+    public void registerBlocks(IForgeRegistry<Block> registry) {
+        gameObjects.stream()
+                .filter(IProviderBlock.class::isInstance)
+                .flatMap(blockProvider -> ((IProviderBlock) blockProvider).getBlocks().stream())
+                .forEach(block -> {
+                    JsonifyCraft.log("Registering block: %s", block.getRegistryName());
+                    registry.register(block);
                 });
     }
 
