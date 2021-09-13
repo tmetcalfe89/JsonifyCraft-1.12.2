@@ -58,4 +58,14 @@ public class DescriptionLoader {
         }
     }
 
+    public void registerItems(IForgeRegistry<Item> registry) {
+        gameObjects.stream()
+                .filter(IProviderItem.class::isInstance)
+                .flatMap(itemProvider -> ((IProviderItem) itemProvider).getItems().stream())
+                .forEach(item -> {
+                    JsonifyCraft.log("Registering item: %s", item.getRegistryName());
+                    registry.register(item);
+                });
+    }
+
 }

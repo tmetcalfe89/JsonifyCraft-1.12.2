@@ -33,6 +33,7 @@ public class JsonifyCraft
     }
 
     public void registerDeserializers() {
+        GameDeserializer.registerDescription("item", ItemDescription.class);
     }
 
     public void loadGameObjects() {
@@ -41,5 +42,13 @@ public class JsonifyCraft
 
     public static void log(String message, Object... variables) {
         LOGGER.info(String.format(message, variables));
+    }
+
+    @Mod.EventBusSubscriber
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
+            GAME_OBJECTS.registerItems(itemRegistryEvent.getRegistry());
+        }
     }
 }
