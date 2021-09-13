@@ -1,6 +1,8 @@
 package com.timinc.jsonifycraft;
 
+import com.timinc.jsonifycraft.description.BlockDescription;
 import com.timinc.jsonifycraft.description.ItemDescription;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -34,6 +36,7 @@ public class JsonifyCraft
 
     public void registerDeserializers() {
         GameDeserializer.registerDescription("item", ItemDescription.class);
+        GameDeserializer.registerDescription("block", BlockDescription.class);
     }
 
     public void loadGameObjects() {
@@ -49,6 +52,11 @@ public class JsonifyCraft
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
             GAME_OBJECTS.registerItems(itemRegistryEvent.getRegistry());
+        }
+
+        @SubscribeEvent
+        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
+            GAME_OBJECTS.registerBlocks(blockRegistryEvent.getRegistry());
         }
     }
 }
