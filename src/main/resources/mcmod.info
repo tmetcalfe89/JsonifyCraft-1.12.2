@@ -1,0 +1,16 @@
+[
+{
+  "modid": "jsonifycraft",
+  "name": "JsonifyCraft",
+  "description": "Add content to Minecraft with JSON files.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Timothy Metcalfe"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
